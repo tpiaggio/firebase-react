@@ -29,7 +29,10 @@ const TimesList = () => {
     );
 
     const unsubscribe = onSnapshot(timesQuery, (snapshot) => {
-      if (!snapshot.docs.length) return;
+      if (!snapshot.docs.length) {
+        setTimes([]);
+        return;
+      }
       const newTimes = [];
       snapshot.forEach((doc) => {
         newTimes.push({

@@ -11,7 +11,10 @@ const MessagesList = () => {
     const messagesQuery = query(collection(database, "messages"));
 
     const unsubscribe = onSnapshot(messagesQuery, (snapshot) => {
-      if (!snapshot.docs.length) return;
+      if (!snapshot.docs.length) {
+        setMessages([]);
+        return;
+      }
       const newMessages = [];
       snapshot.forEach((doc) => {
         newMessages.push(doc.data());

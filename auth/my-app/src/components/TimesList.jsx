@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import app from "../firebase";
 import {
   getFirestore,
@@ -9,7 +9,7 @@ import {
   doc,
   deleteDoc,
 } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import {getAuth} from "firebase/auth";
 
 const database = getFirestore(app);
 const auth = getAuth(app);
@@ -24,7 +24,10 @@ const TimesList = () => {
     );
 
     const unsubscribe = onSnapshot(timesQuery, (snapshot) => {
-      if (!snapshot.docs.length) return;
+      if (!snapshot.docs.length) {
+        setTimes([]);
+        return;
+      }
       const newTimes = [];
       snapshot.forEach((doc) => {
         newTimes.push({
